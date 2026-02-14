@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "bot-py"
+		},
+		{
+			"path": "bot-ts"
+		}
+	],
+	"settings": {}
+}
