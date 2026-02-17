@@ -1,0 +1,17 @@
+# AI 知识库依赖声明
+
+[[refs]]
+name = "agent-client-protocol"
+url = "https://github.com/agentclientprotocol/agent-client-protocol.git"
+version = "main"
+
+[[refs]]
+name = "qwen-code"
+url = "https://github.com/QwenLM/qwen-code.git"
+version = "main"
+
+[[refs]]
+name = "kimi-cli"
+url = "https://github.com/MoonshotAI/kimi-cli.git"
+version = "main"
+
