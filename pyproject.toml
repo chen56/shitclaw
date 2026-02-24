@@ -1,0 +1,136 @@
+[project]
+name = "nbcode"
+version = "0.1.0dev20260223000001"
+license = { text = "MIT" }
+
+description = "ai native code lab"
+readme = "README.md"
+authors = [{ name = "Chen Peng" }]
+urls = { "homepage" = "https://github.com/chen56/nbcode" }
+
+requires-python = ">=3.12"
+
+dependencies = [
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.2",
+    "ruff>=0.14.10",
+    "keyring>=25.7.0",
+    "pyright>=1.1.408",
+]
+
+[build-system]
+requires = ["uv_build>=0.10.4,<0.11.0"]
+# uv_build默认就使用 src/ 布局，不需要额外配置
+build-backend = "uv_build"
+
+[project.scripts]
+nbcode = "nbcode:main"
+
+#################################################################################
+# uv
+#################################################################################
+
+[tool.uv.build-backend]
+namespace = false
+module-name = ["nbcode"]
+module-root = "src"
+
+
+[tool.uv]
+package = true
+
+# `uv python install`的不是官网文件，而是这个项目打包的便携版: https://github.com/astral-sh/python-build-standalone/
+# 镜像较少，参考: https://github.com/tuna/issues/issues/2125
+# 已知镜像站点：
+# - https://mirror.nju.edu.cn/github-release/astral-sh/python-build-standalone/
+# - https://registry.npmmirror.com/-/binary/python-build-standalone/
+# - https://gh-proxy.com/github.com/indygreg/python-build-standalone/releases/download
+# 镜像下载示例：
+# - uv python install --mirror https://registry.npmmirror.com/-/binary/python-build-standalone/ 3.12
+# - UV_PYTHON_INSTALL_MIRROR=https://mirror.nju.edu.cn/github-release/astral-sh/python-build-standalone/ uv python install 3.12
+# pyproject.toml config ref: https://docs.astral.sh/uv/reference/settings/#python-install-mirror
+python-install-mirror = "https://registry.npmmirror.com/-/binary/python-build-standalone/"
+
+[[tool.uv.index]]
+url = "https://pypi.tuna.tsinghua.edu.cn/simple/"
+[[tool.uv.index]]
+url = "https://mirrors.aliyun.com/pypi/simple/"
+
+#################################################################################
+# --- Ruff 配置（更新为 NumPy 风格） ---
+#################################################################################
+
+[tool.ruff]
+cache-dir = "build/.ruff_cache"
+src = ["."]
+exclude = [".git", "__pycache__", "build", "dist", ".venv"]
+line-length = 150
+
+[tool.ruff.lint]
+ignore = [
+    "D100", # Missing docstring in a public module
+    "D101", # Missing docstring in a public class
+    "D102", # Missing docstring in a public method
+    "D103", # Missing docstring in a public function
+    "D104", # Missing docstring in a public package
+    "D105", # undocumented-magic-method (D105)
+    "D107", # Missing docstring in a public nested class
+    "D205", # 1 blank line required after the summary line
+    "D400",# missing-trailing-period
+    "D401", # The first line should be imperative
+    "E501", # Line too long
+    "W293", # Blank line contains whitespace
+]
+
+select = [
+    "E", # pycodestyle Errors
+    "W", # pycodestyle Warnings
+    "F", # Pyflakes
+    "B", # Bugbear
+]
+extend-select = [
+    "UP", # pyupgrade
+    "D", # pydocstyle
+]
+
+[tool.ruff.lint.per-file-ignores]
+"**/{tests,docs,tools}/**" = [
+    "D102", # Missing docstring in a public method
+    "D106", # Missing docstring in a public nested class
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy" # 使用 NumPy 风格的 docstring 约定
+
+#################################################################################
+# pytest
+#################################################################################
+
+[tool.pytest.ini_options]
+cache_dir = "build/.pytest_cache"
+
+#################################################################################
+# pyright
+#################################################################################
+[tool.pyright]
+include = [
+    "src",
+    "tests",
+]
+exclude = ["**/node_modules", "**/__pycache__"]
+ignore = ["src/oldstuff"]
+defineConstant = { DEBUG = true }
+# stubPath = "src/stubs"
+
+reportMissingImports = "error"
+reportMissingTypeStubs = false
+
+pythonVersion = "3.12" # 根环境默认用最新版本，兼容多平台特性
+
+# 根环境默认平台（可任选，子环境覆盖），不配置按照当前运行平台
+# 目前pyright无法配置检查多个平台，可用用uv run pyright --pythonplatform Darwin 参数多次检查
+# pythonPlatform = "Darwin"
+# 可用executionEnvironments 对特定目录指定特定平台

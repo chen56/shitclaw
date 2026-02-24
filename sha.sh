@@ -24,7 +24,10 @@ cd "$ROOT_DIR"
 # 此位置以上的全都是bake工具脚本，copy走可以直接用，之下的为项目特定cmd，自己弄
 ####################################################################################
 
+sync() {
+  _run rm -rf GEMINI.md && ln -fs AGENTS.md GEMINI.md
 
+}
 info() {
   ip() {
     _run curl cip.cc
