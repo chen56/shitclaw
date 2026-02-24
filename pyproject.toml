@@ -11,6 +11,8 @@ urls = { "homepage" = "https://github.com/chen56/nbcode" }
 requires-python = ">=3.12"
 
 dependencies = [
+    "cyclopts>=4.6.0",
+    "pydantic>=2.12.5",
 ]
 
 [dependency-groups]
@@ -120,7 +122,7 @@ include = [
     "src",
     "tests",
 ]
-exclude = ["**/node_modules", "**/__pycache__"]
+exclude = ["**/node_modules", "**/__pycache__", "**/.*", ".venv"]
 ignore = ["src/oldstuff"]
 defineConstant = { DEBUG = true }
 # stubPath = "src/stubs"
