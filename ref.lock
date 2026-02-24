@@ -4,21 +4,21 @@
       "url": "https://github.com/agentclientprotocol/agent-client-protocol.git",
       "commit": "d8933a0f0dd05919f6cf582a670211a535d6e87f",
       "version": "main",
-      "path": ".bot/cache/ref/github.com/agentclientprotocol/agent-client-protocol",
+      "path": ".nbcode/cache/ref/github.com/agentclientprotocol/agent-client-protocol",
       "description": "Official Spec: A protocol for standardizing communication between code editors and AI coding agents"
     },
     "qwen-code": {
       "url": "https://github.com/QwenLM/qwen-code.git",
       "commit": "f467c2493f39999314a89d7b87599e60240fa538",
       "version": "main",
-      "path": ".bot/cache/ref/github.com/QwenLM/qwen-code",
+      "path": ".nbcode/cache/ref/github.com/QwenLM/qwen-code",
       "description": ""
     },
     "kimi-cli": {
       "url": "https://github.com/MoonshotAI/kimi-cli.git",
       "commit": "62baaca84f8ebb2b883a6900f1139d1429cce22d",
       "version": "main",
-      "path": ".bot/cache/ref/github.com/MoonshotAI/kimi-cli",
+      "path": ".nbcode/cache/ref/github.com/MoonshotAI/kimi-cli",
       "description": "Official Spec: Kimi Code CLI is your next CLI agent."
     }
   },

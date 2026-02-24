@@ -5,7 +5,7 @@
 
 ## 2. 核心组件
 
-### 2.1 依赖描述文件 (`.bot/ref.lock.json`)
+### 2.1 依赖描述文件 (`.nbcode/ref.lock.json`)
 作为项目的“知识 Source of Truth”，记录所有外部知识源的确定性版本。
 ```json
 {
@@ -16,7 +16,7 @@
       "url": "https://github.com/agentclientprotocol/agent-client-protocol.git",
       "version": "main",
       "commit": "optional-last-synced-commit-hash",
-      "path": ".bot/cache/ref/github.com/agentclientprotocol/agent-client-protocol",
+      "path": ".nbcode/cache/ref/github.com/agentclientprotocol/agent-client-protocol",
       "auto_index": true
     }
   ]
@@ -31,7 +31,7 @@
 4. 如果是 `main` 分支且有更新，触发重新索引。
 
 ### 2.3 分层索引机制 (`Layered Indexing`)
-对仓库内容进行渐进式摘要，存放在 `.bot/index/`：
+对仓库内容进行渐进式摘要，存放在 `.nbcode/index/`：
 
 - **Layer 1 (Global Overview)**: 项目定位、核心概念、顶层目录结构。
 - **Layer 2 (Feature/Module Maps)**: 关键 API 定义、协议方法列表、核心模型结构（如 `PromptRequest`）。
@@ -44,7 +44,7 @@
 ### 3.1 预处理阶段 (Knowledge Lookup)
 在执行任何重大开发任务（如实现 ACP 后端）之前，Agent 必须执行：
 1. **识别需求**: 需要哪些协议或库的知识？
-2. **检索索引**: 查看 `.bot/index/` 是否有相关记录。
+2. **检索索引**: 查看 `.nbcode/index/` 是否有相关记录。
 3. **精准阅读**: 根据 Layer 2 索引定位到具体的 `src/*.rs` 或 `docs/*.md` 进行深度解析。
 
 ### 3.2 冲突处理
